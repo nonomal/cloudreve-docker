@@ -13,7 +13,7 @@
 
 支持架构
 
-- linux/amd64: `xaiverniu/cloudreve:amd64`
+- linux/amd64: `xaiverniu/cloudreve:latest`
 - linux/arm64: `xaiverniu/cloudreve:arm64v8`
 - linux/arm/v7: `xaiverniu/cloudreve:arm32v7`
 
