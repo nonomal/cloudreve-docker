@@ -25,15 +25,15 @@ jobs:
         uses: olegtarasov/get-tag@v2
       - name: build dockerfile and push to dockerhub
         run: |
-          REPO_NAME="$(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/cloudreve" && \
-          TAGS="$REPO_NAME:latest $REPO_NAME:amd64" && \
-          echo "GIT TAG: ${GIT_TAG_NAME}, REPO NAME: ${REPO_NAME}, TAGS: ${TAGS}" && \
+          REPO_NAME="xavierniu/cloudreve"
+          TAGS="$REPO_NAME:latest $REPO_NAME:amd64"
+          echo "GIT TAG: ${GIT_TAG_NAME}, REPO NAME: ${REPO_NAME}, TAGS: ${TAGS}"
           if [[ -z "$GIT_TAG_NAME" ]]; then \
             echo "no git tag here" \
           else \
             TAG+=" $REPO_NAME:${GIT_TAG_NAME}-amd64" \
             echo "tag existed! TAG: ${TAG}" \
-          fi && \
+          fi
           docker buildx build \
           --platform=linux/amd64,linux/arm/v7,linux/arm64 \
           --push \
