@@ -13,7 +13,7 @@ RUN echo ">>>>>> clone Cloudreve from GitHub" \
 
 RUN echo ">>>>>> build frontend" \
     && cd ./Cloudreve/assets \
-    && yarn install \
+    && yarn install --network-timeout 100000 \
     && yarn run build
 
 RUN echo ">>>>>> build backend" \
