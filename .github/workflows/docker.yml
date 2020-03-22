@@ -12,9 +12,9 @@ jobs:
       - name: DockerHub login
         env: 
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
         run: |
-          echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+          echo "${DOCKER_PASS}" | docker login --username ${DOCKER_USERNAME} --password-stdin
       - name: set up docker buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
@@ -41,3 +41,9 @@ jobs:
             -t ${REPO_NAME}:arm32v7 $([[ -z "${GIT_TAG_NAME}" ]] && echo "" || echo "-t ${REPO_NAME}:${GIT_TAG_NAME}-arm32v7")  \
             --push \
             . -f Dockerfile.armhf
+      - name: sync readme.md
+        uses: meeDamian/sync-readme@v1.0.6
+        with:
+          user: xavierniu
+          pass: ${{ secrets.DOCKER_PASS }}
+          slug: xavierniu/cloudreve
