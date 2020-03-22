@@ -4,8 +4,7 @@ on:
     branches: 
       - master
 jobs:
-  docker-amd64:
-    name: cloudreve AMD64 latest
+  latest&amd64:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -19,8 +18,8 @@ jobs:
       - name: set up docker buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
-          with:
-            version: latest
+        with:
+          version: latest
       - name: get tag name
         id: tagName
         uses: olegtarasov/get-tag@v2
