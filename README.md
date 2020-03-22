@@ -8,10 +8,6 @@
 - golang: 1.14
 - cloudreve: 3.0.0-rc1
 
-GitHub Actions 依赖
-
-- [xavier-niu/build-cloudreve-docker-action@master](https://github.com/xavier-niu/build-cloudreve-docker-action): 编译Cloudreve源文件。
-
 ## Cloudreve
 
 Cloudreve能助您以最低的成本快速搭建公私兼备的网盘系统。
