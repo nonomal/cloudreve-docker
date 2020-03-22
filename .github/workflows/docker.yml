@@ -14,7 +14,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
         run: |
-          echo "${DOCKER_PASS}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+          echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
       - name: set up docker buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
