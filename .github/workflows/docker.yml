@@ -26,16 +26,18 @@ jobs:
       - name: build dockerfile and push to dockerhub
         run: |
           REPO_NAME="xavierniu/cloudreve"
-          TAGS="$REPO_NAME:latest $REPO_NAME:amd64"
-          echo "GIT TAG: ${GIT_TAG_NAME}, REPO NAME: ${REPO_NAME}, TAGS: ${TAGS}"
           if [[ -z "$GIT_TAG_NAME" ]]; then \
             echo "no git tag here"; \
+            docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            -t ${REPO_NAME}:latest -t $REPO_NAME:amd64 \
+            --push \
+            . -f Dockerfile; \
           else \
-            TAGS+=" $REPO_NAME:${GIT_TAG_NAME}-amd64"; \
-            echo "tag existed! TAG: ${TAGS}"; \
+            echo "tag existed! TAG: ${GIT_TAG_NAME}"; \
+            docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            -t ${REPO_NAME}:latest -t ${REPO_NAME}:amd64 -t ${REPO_NAME}:${GIT_TAG_NAME}-amd64 \
+            --push \
+            . -f Dockerfile; \
           fi
-          docker buildx build \
-          --platform linux/amd64,linux/arm/v7,linux/arm64 \
-          -t ${TAGS} \
-          --push \
-          . -f Dockerfile
