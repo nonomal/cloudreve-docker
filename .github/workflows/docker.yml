@@ -4,7 +4,7 @@ on:
     branches: 
       - master
 jobs:
-  latest-and-amd64:
+  docker:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -30,4 +30,14 @@ jobs:
             --platform=linux/amd64,linux/arm/v7,linux/arm64 \
             -t ${REPO_NAME}:latest -t ${REPO_NAME}:amd64 $([[ -z "${GIT_TAG_NAME}" ]] && echo "" || echo "-t ${REPO_NAME}:${GIT_TAG_NAME}-amd64")  \
             --push \
-            . -f Dockerfile;
+            . -f Dockerfile
+          docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            -t ${REPO_NAME}:arm64v8 $([[ -z "${GIT_TAG_NAME}" ]] && echo "" || echo "-t ${REPO_NAME}:${GIT_TAG_NAME}-arm64v8")  \
+            --push \
+            . -f Dockerfile.aarch64
+          docker buildx build \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+            -t ${REPO_NAME}:arm32v7 $([[ -z "${GIT_TAG_NAME}" ]] && echo "" || echo "-t ${REPO_NAME}:${GIT_TAG_NAME}-arm32v7")  \
+            --push \
+            . -f Dockerfile.armhf
