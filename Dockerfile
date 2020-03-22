@@ -36,12 +36,12 @@ WORKDIR /cloudreve
 
 COPY --from=builder /ProjectCloudreve/Cloudreve/cloudreve ./
 
-RUN echo ">>>>>> update dependencies <<<<<<" \
+RUN echo ">>>>>> update dependencies" \
     && apk update && apk add tzdata \
-    && echo ">>>>>> set up timezone <<<<<<" \
+    && echo ">>>>>> set up timezone" \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && echo ">>>>>> clean up <<<<<<" \
+    && echo ">>>>>> clean up" \
     && apk del tzdata \
     && mv ./cloudreve ./main \
     && chmod +x ./main

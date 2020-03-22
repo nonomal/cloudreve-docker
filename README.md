@@ -1,12 +1,11 @@
 # Cloudreve Docker
 
-此Docker镜像由Xavier Niu维护。
+此Docker镜像由Xavier Niu维护，基于：
 
-基于
-
-- lsiobase/alpine:3.11
-- golang: 1.14
-- cloudreve: 3.0.0-rc1
+- latest(for linux/amd64)
+  - lsiobase/alpine:3.11(base image)
+  - golang:1.14.1-alpine3.11(base image for builder)
+  - cloudreve: 3.0.0-rc1
 
 ## Cloudreve
 
