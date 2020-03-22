@@ -31,11 +31,11 @@ jobs:
           if [[ -z "$GIT_TAG_NAME" ]]; then \
             echo "no git tag here" \
           else \
-            TAG+=" $REPO_NAME:${GIT_TAG_NAME}-amd64" \
-            echo "tag existed! TAG: ${TAG}" \
+            TAGS+=" $REPO_NAME:${GIT_TAG_NAME}-amd64" \
+            echo "tag existed! TAG: ${TAGS}" \
           fi
           docker buildx build \
           --platform=linux/amd64,linux/arm/v7,linux/arm64 \
           --push \
           -f Dockerfile . \
-          -t ${TAG}
+          -t ${TAGS}
